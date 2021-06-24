@@ -64,3 +64,34 @@ function inifiniteLoop(): never {
 declare function create(o: object | null): void;
 
 create({prop: 0})
+
+let a: number[] = [1,2,3,4]
+let ro: ReadonlyArray<number> = a
+a = ro as number[]
+
+// index types
+//TypeScript支持两种索引签名：字符串和数字。可以同时使用两种类型的索引，但是数字索引的返回值必须是字符串索引返回值类型的子类型
+
+class Animal {
+    name: string;
+}
+class Dog extends Animal {
+    breed: string;
+}
+
+// error：使用数值型的字符串索引，有时会得到完全不同的Animal!
+// interface NotOkay {
+//     [x: number]: Animal;
+//     [x: string]: Dog;
+// }
+//编译OK
+interface Okay {
+    [x: number]: Dog;     //Dog是Animal子类
+    [x: string]: Animal;
+}
+
+interface NumberDictionary {
+    [index: string]: number;
+    length: number;    // length是number类型
+    // name: string       // error，`name`的类型与索引类型返回值的类型不匹配
+}
