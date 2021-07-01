@@ -1,3 +1,4 @@
+export {}
 // number
 let decLiteral: number = 20
 let hexLiteral: number = 0x14
@@ -95,3 +96,22 @@ interface NumberDictionary {
     length: number;    // length是number类型
     // name: string       // error，`name`的类型与索引类型返回值的类型不匹配
 }
+
+// 混合类型
+interface Counter {
+    (start: number): string
+    interval: number
+    reset(): void
+  }
+  
+  function getCounter(): Counter {
+    let counter = (function (start: number) { }) as Counter
+    counter.interval = 123
+    counter.reset = function () { }
+    return counter
+  }
+  
+  let count = getCounter()
+  count(10)
+  count.reset()
+  count.interval = 5.0
