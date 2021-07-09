@@ -1,3 +1,4 @@
+export {}
 class User {
     fullName: string
     firstName: string
