@@ -5,7 +5,7 @@ function normalizeHeaderName(headers: any, normalizedName:
     if (!headers) {
         return
     }
-    Object.keys(headers).forEach((name) => {
+    Object.keys(headers).forEach(name => {
         if (name !== normalizedName && name.toUpperCase() ===
         normalizedName.toUpperCase()) {
             headers[normalizedName] = headers[name]
@@ -15,10 +15,12 @@ function normalizeHeaderName(headers: any, normalizedName:
 }
 
 export function processHeaders(headers: any, data: any): any {
-    normalizeHeaderName(headers, 'Context-Type')
+    normalizeHeaderName(headers, 'Content-Type')
     if (isPlainObject(data)) {
-        if (headers && !headers['Context-Type']) {
-            headers['Context-Type'] = 'application/json;charset=utf-8'
+        if (headers && !headers['Content-Type']) {
+            headers['Content-Type'] = 'application/json;charset=utf-8'
         }
     }
+
+    return headers
 }
