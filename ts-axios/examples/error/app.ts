@@ -1,3 +1,4 @@
+import { AxisoError } from '../../src/helpers/error'
 import axios from '../../src/index'
 
 axios({
@@ -35,6 +36,10 @@ axios({
   timeout: 2000
 }).then((res) => {
   console.log(res)
-}).catch((e) => {
+}).catch((e: AxisoError) => {
   console.log(e.message)
+  console.log(e.config)
+  console.log(e.code)
+  console.log(e.request)
+  console.log(e.isAxiosError)
 })
